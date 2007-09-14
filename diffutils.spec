@@ -1,11 +1,11 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	2.8.7
-Release:	%mkrel 5
-License:	GPL
+Release:	%mkrel 6
+License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/diffutils/
-Source:		ftp://alpha.gnu.org/gnu/diffutils/diffutils-%{version}.tar.gz
+Source0:	ftp://alpha.gnu.org/gnu/diffutils/diffutils-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
 Patch2:		%{name}-2.8.7-i18n.patch
@@ -67,5 +67,4 @@ perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' config.h
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man*/*
 %{_infodir}/diff.info*
-
 
