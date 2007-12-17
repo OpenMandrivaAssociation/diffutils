@@ -10,7 +10,6 @@ Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
 Patch2:		%{name}-2.8.7-i18n.patch
 Requires(pre):	info-install
-Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
