@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	2.8.7
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/diffutils/
@@ -9,6 +9,7 @@ Source0:	ftp://alpha.gnu.org/gnu/diffutils/diffutils-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
 Patch2:		%{name}-2.8.7-i18n.patch
+Patch3:		diffutils-2.8.7-format_not_a_string_literal_and_no_format_arguments.diff
 Requires(pre):	info-install
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -30,6 +31,7 @@ Install diffutils if you need to compare text files.
 %prep
 %setup -q
 %patch2 -p1 -b .i18n
+%patch3 -p0 -b .format_not_a_string_literal_and_no_format_arguments
 
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
