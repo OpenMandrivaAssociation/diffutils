@@ -1,15 +1,13 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	2.8.7
-Release:	%mkrel 10
+Version:	2.9
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/diffutils/
-Source0:	ftp://alpha.gnu.org/gnu/diffutils/diffutils-%{version}.tar.gz
+Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
-Patch2:		%{name}-2.8.7-i18n.patch
-Patch3:		diffutils-2.8.7-format_not_a_string_literal_and_no_format_arguments.diff
 Requires(pre):	info-install
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -30,20 +28,23 @@ Install diffutils if you need to compare text files.
 
 %prep
 %setup -q
-%patch2 -p1 -b .i18n
-%patch3 -p0 -b .format_not_a_string_literal_and_no_format_arguments
 
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
 
 %build
+# default editor for sdiff interactive mode, vi is likely better than ed
+perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
+
 # for finding help2man
 export PATH=$PATH:`pwd`
+autoheader
+%configure2_5x \
+	--disable-rpath \
+	--without-included-regex \
+	--with-packager="%{distribution}" \
+	--with-packager-bug-reports="http://qa.mandriva.com"
 
-%configure2_5x
-
-# default editor for sdiff interactive mode, vi is likely better than ed
-perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' config.h
 
 %make
 
@@ -54,7 +55,7 @@ perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' config.h
 
 %find_lang %{name}
 
-%post 
+%post
 %_install_info diff.info
 
 %preun
@@ -69,4 +70,3 @@ perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' config.h
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man*/*
 %{_infodir}/diff.info*
-
