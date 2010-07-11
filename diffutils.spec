@@ -1,6 +1,6 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	2.9
+Version:	3.0
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Development/Other
@@ -8,6 +8,7 @@ URL:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
+BuildRequires:	libsigsegv-devel
 Requires(pre):	info-install
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -38,7 +39,7 @@ perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
 # for finding help2man
 export PATH=$PATH:`pwd`
-autoheader
+autoreconf
 %configure2_5x \
 	--disable-rpath \
 	--without-included-regex \
