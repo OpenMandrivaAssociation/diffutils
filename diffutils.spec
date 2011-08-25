@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.0
-Release:	%mkrel 2
+Version:	3.1
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/diffutils/
@@ -57,10 +57,10 @@ autoreconf
 %find_lang %{name}
 
 %post
-%_install_info diff.info
+%_install_info %{name}.info
 
 %preun
-%_remove_install_info diff.info
+%_remove_install_info %{name}.info
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
@@ -70,4 +70,4 @@ autoreconf
 %doc NEWS README
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man*/*
-%{_infodir}/diff.info*
+%{_infodir}/%{name}.info*
