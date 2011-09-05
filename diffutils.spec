@@ -1,6 +1,6 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.1
+Version:	3.2
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Development/Other
