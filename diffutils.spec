@@ -37,7 +37,7 @@ perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
 # for finding help2man
 export PATH=$PATH:`pwd`
-autoreconf
+autoreconf -fi
 %configure2_5x \
 	--disable-rpath \
 	--without-included-regex \
