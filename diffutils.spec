@@ -8,6 +8,7 @@ URL:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
+BuildRequires:	gettext-devel
 BuildRequires:	libsigsegv-devel
 
 %description
