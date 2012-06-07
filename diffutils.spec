@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.2
-Release:	%mkrel 1
+Release:	2
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/diffutils/
@@ -9,8 +9,6 @@ Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source1:	%{SOURCE0}.sig
 Source2:	%{name}-help2man.bz2
 BuildRequires:	libsigsegv-devel
-Requires(pre):	info-install
-Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
@@ -46,28 +44,17 @@ autoreconf
 	--with-packager="%{distribution}" \
 	--with-packager-bug-reports="http://qa.mandriva.com"
 
-
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall_std
 
 %find_lang %{name}
 
-%post
-%_install_info %{name}.info
-
-%preun
-%_remove_install_info %{name}.info
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(644,root,root,755)
 %doc NEWS README
-%attr(755,root,root) %{_bindir}/*
+%{_bindir}/*
 %{_mandir}/man*/*
 %{_infodir}/%{name}.info*
