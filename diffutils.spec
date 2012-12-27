@@ -8,6 +8,7 @@ URL:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source1:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz.sig	
 Source2:	%{name}-help2man.bz2
+Patch0:		diffutils-3.2-no-gets.patch
 BuildRequires:	gettext-devel
 BuildRequires:	libsigsegv-devel
 
@@ -28,6 +29,7 @@ Install diffutils if you need to compare text files.
 
 %prep
 %setup -q
+%patch0 -p1
 
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
