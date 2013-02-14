@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.2
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/diffutils/
@@ -34,24 +34,23 @@ Install diffutils if you need to compare text files.
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
 
+autoreconf -fi
+
 %build
 # default editor for sdiff interactive mode, vi is likely better than ed
 perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
 # for finding help2man
 export PATH=$PATH:`pwd`
-autoreconf -fi
 %configure2_5x \
 	--disable-rpath \
 	--without-included-regex \
 	--with-packager="%{distribution}" \
-	--with-packager-bug-reports="http://qa.mandriva.com"
+	--with-packager-bug-reports="%{bugurl}"
 
 %make
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
 %find_lang %{name}
