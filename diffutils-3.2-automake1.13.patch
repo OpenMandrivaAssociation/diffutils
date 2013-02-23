@@ -1,0 +1,10 @@
+--- configure.ac.orig	2013-02-23 08:33:57.133595746 +0000
++++ configure.ac	2013-02-23 08:34:01.297595914 +0000
+@@ -33,7 +33,6 @@
+ 
+ AC_PROG_AWK
+ AC_PROG_CC
+-AM_PROG_CC_STDC
+ AM_MISSING_PROG([HELP2MAN], [help2man])
+ AC_PROG_RANLIB
+ gl_EARLY
