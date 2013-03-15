@@ -10,6 +10,7 @@ Source1:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz.sig
 Source2:	%{name}-help2man.bz2
 Patch0:		diffutils-3.2-no-gets.patch
 Patch1:		diffutils-3.2-automake1.13.patch
+Patch2:		diffutils-aarch64.patch
 BuildRequires:	gettext-devel
 BuildRequires:	libsigsegv-devel
 
@@ -32,6 +33,7 @@ Install diffutils if you need to compare text files.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
