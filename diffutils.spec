@@ -4,12 +4,13 @@ Version:	3.3
 Release:	1
 License:	GPLv2+
 Group:		Development/Other
-URL:		http://www.gnu.org/software/diffutils/
+Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
 Source2:	%{name}-help2man.bz2
 Patch0:		diffutils-3.2-no-gets.patch
 Patch1:		diffutils-3.2-automake1.13.patch
 Patch2:		diffutils-aarch64.patch
+
 BuildRequires:	gettext-devel
 BuildRequires:	libsigsegv-devel
 
@@ -30,9 +31,7 @@ Install diffutils if you need to compare text files.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p0
-%patch2 -p1
+%apply_patches
 
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
@@ -41,12 +40,11 @@ autoreconf -fi
 
 %build
 # default editor for sdiff interactive mode, vi is likely better than ed
-perl -pi -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
+sed -i -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
 # for finding help2man
 export PATH=$PATH:`pwd`
 %configure2_5x \
-	--disable-rpath \
 	--without-included-regex \
 	--with-packager="%{distribution}" \
 	--with-packager-bug-reports="%{bugurl}"
@@ -63,3 +61,4 @@ export PATH=$PATH:`pwd`
 %{_bindir}/*
 %{_mandir}/man*/*
 %{_infodir}/%{name}.info*
+
