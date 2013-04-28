@@ -7,9 +7,6 @@ Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
 Source2:	%{name}-help2man.bz2
-Patch0:		diffutils-3.2-no-gets.patch
-Patch1:		diffutils-3.2-automake1.13.patch
-Patch2:		diffutils-aarch64.patch
 
 BuildRequires:	gettext-devel
 BuildRequires:	libsigsegv-devel
