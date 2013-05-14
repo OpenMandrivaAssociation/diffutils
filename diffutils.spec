@@ -33,12 +33,14 @@ Install diffutils if you need to compare text files.
 bzcat %{SOURCE2} > help2man
 chmod +x help2man
 
-autoreconf -fi
-
-%build
 # default editor for sdiff interactive mode, vi is likely better than ed
 sed -i -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
+aclocal -I m4 --dont-fix
+automake -a
+autoconf
+
+%build
 # for finding help2man
 export PATH=$PATH:`pwd`
 %configure2_5x \
