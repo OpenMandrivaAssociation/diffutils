@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.3
-Release:	8
+Release:	9
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
@@ -43,7 +43,7 @@ autoconf
 %build
 # for finding help2man
 export PATH=$PATH:`pwd`
-%configure2_5x \
+%configure \
 	--without-included-regex \
 	--with-packager="%{distribution}" \
 	--with-packager-bug-reports="%{bugurl}"
