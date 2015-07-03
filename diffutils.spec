@@ -1,12 +1,17 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.3
-Release:	10
+Release:	11
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
 Source2:	diffutils-help2man
+Patch1:		diffutils-cmp-s-empty.patch
+Patch2:		diffutils-mkdir_p.patch
+Patch3:		diffutils-FILE....patch
+Patch4:		diffutils-i18n.patch
+Patch5:		diffutils-format-security.patch
 
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
@@ -29,16 +34,27 @@ Install diffutils if you need to compare text files.
 
 %prep
 %setup -q
-%apply_patches
+# For 'cmp -s', compare file sizes only if both non-zero (bug #563618).
+%patch1 -p1 -b .cmp-s-empty
+
+# Work around @mkdir_p@ build issue.
+%patch2 -p1 -b .mkdir_p
+
+# Fix --help output and man page (bug #1079076).
+%patch3 -p1 -b .FILE...
+
+%patch4 -p1 -b .i18n
+
+# Applied upstream gnulib patch to avoid -Wformat-security warning
+# (bug #1037038).
+%patch5 -p1 -b .format-security
 
 install -m755 %{SOURCE2} help2man
 
 # default editor for sdiff interactive mode, vi is likely better than ed
 sed -i -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
-aclocal -I m4 --dont-fix
-automake -a
-autoconf
+autoreconf -ivf
 
 %build
 # for finding help2man
