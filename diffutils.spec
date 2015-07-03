@@ -6,7 +6,7 @@ License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
-Source2:	%{name}-help2man.bz2
+Source2:	diffutils-help2man
 
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
@@ -31,8 +31,7 @@ Install diffutils if you need to compare text files.
 %setup -q
 %apply_patches
 
-bzcat %{SOURCE2} > help2man
-chmod +x help2man
+install -m755 %{SOURCE2} help2man
 
 # default editor for sdiff interactive mode, vi is likely better than ed
 sed -i -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
