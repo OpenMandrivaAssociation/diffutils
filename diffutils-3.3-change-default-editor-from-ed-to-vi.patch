@@ -1,0 +1,11 @@
+--- diffutils-3.3/configure.ac~	2015-07-03 23:02:50.411710884 +0200
++++ diffutils-3.3/configure.ac	2015-07-03 23:14:49.975150137 +0200
+@@ -128,7 +128,7 @@ fi
+ AC_C_INLINE
+ AC_C_VARARRAYS
+ 
+-AC_DEFINE([DEFAULT_EDITOR_PROGRAM], ["ed"],
++AC_DEFINE([DEFAULT_EDITOR_PROGRAM], ["vi"],
+   [Name of editor program, unless overridden.])
+ 
+ AC_PATH_PROG([PR_PROGRAM], [pr], [""])

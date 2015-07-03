@@ -12,6 +12,7 @@ Patch2:		diffutils-mkdir_p.patch
 Patch3:		diffutils-FILE....patch
 Patch4:		diffutils-i18n.patch
 Patch5:		diffutils-format-security.patch
+Patch6:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
 
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
@@ -50,9 +51,6 @@ Install diffutils if you need to compare text files.
 %patch5 -p1 -b .format-security
 
 install -m755 %{SOURCE2} help2man
-
-# default editor for sdiff interactive mode, vi is likely better than ed
-sed -i -e 's/^(#define\s+DEFAULT_EDITOR_PROGRAM\s+)"ed"/$1"vi"/' configure*
 
 autoreconf -ivf
 
