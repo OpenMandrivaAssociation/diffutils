@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.3
-Release:	11
+Release:	12
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
