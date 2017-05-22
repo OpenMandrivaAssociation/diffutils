@@ -1,6 +1,6 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.5
+Version:	3.6
 Release:	1
 License:	GPLv2+
 Group:		Development/Other
@@ -59,4 +59,3 @@ export PATH=$PATH:`pwd`
 %{_bindir}/*
 %{_mandir}/man*/*
 %{_infodir}/%{name}.info*
-
