@@ -1,7 +1,7 @@
-diff -up diffutils-2.8.1/src/cmp.c.cmp-s-empty diffutils-2.8.1/src/cmp.c
---- diffutils-2.8.1/src/cmp.c.cmp-s-empty	2002-04-05 21:37:31.000000000 +0100
-+++ diffutils-2.8.1/src/cmp.c	2010-06-25 14:56:08.464802321 +0100
-@@ -316,12 +316,15 @@ main (int argc, char **argv)
+diff -up diffutils-3.6/src/cmp.c.cmp-s-empty diffutils-3.6/src/cmp.c
+--- diffutils-3.6/src/cmp.c.cmp-s-empty	2017-05-18 18:39:59.000000000 +0100
++++ diffutils-3.6/src/cmp.c	2017-05-22 10:53:28.477147864 +0100
+@@ -330,12 +330,15 @@ main (int argc, char **argv)
  
    /* If only a return code is needed,
       and if both input descriptors are associated with plain files,

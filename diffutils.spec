@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.3
-Release:	12
+Version:	3.6
+Release:	1
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
@@ -9,9 +9,7 @@ Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source2:	diffutils-help2man
 Patch1:		diffutils-cmp-s-empty.patch
 Patch2:		diffutils-mkdir_p.patch
-Patch3:		diffutils-FILE....patch
 Patch4:		diffutils-i18n.patch
-Patch5:		diffutils-format-security.patch
 Patch6:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
 
 BuildRequires:	gettext-devel
@@ -35,20 +33,7 @@ Install diffutils if you need to compare text files.
 
 %prep
 %setup -q
-# For 'cmp -s', compare file sizes only if both non-zero (bug #563618).
-%patch1 -p1 -b .cmp-s-empty
-
-# Work around @mkdir_p@ build issue.
-%patch2 -p1 -b .mkdir_p
-
-# Fix --help output and man page (bug #1079076).
-%patch3 -p1 -b .FILE...
-
-%patch4 -p1 -b .i18n
-
-# Applied upstream gnulib patch to avoid -Wformat-security warning
-# (bug #1037038).
-%patch5 -p1 -b .format-security
+%apply_patches
 
 install -m755 %{SOURCE2} help2man
 
@@ -74,4 +59,3 @@ export PATH=$PATH:`pwd`
 %{_bindir}/*
 %{_mandir}/man*/*
 %{_infodir}/%{name}.info*
-
