@@ -1,0 +1,73 @@
+diff -Nair diffutils-3.6/configure.ac diffutils-3.6.tpg/configure.ac
+43a44,55
+> AC_CACHE_CHECK([for gcc 7-compatible __builtin_mul_overflow_p],
+>   [utils_cv_builtin_mul_overflow_p],
+>   [AC_COMPILE_IFELSE(
+>     [AC_LANG_PROGRAM(
+>       [[]],
+>       [[return __builtin_mul_overflow_p(1, 2, 3);]])],
+>     [utils_cv_builtin_mul_overflow_p=yes],
+>     [utils_cv_builtin_mul_overflow_p=no])])
+> if test $utils_cv_builtin_mul_overflow_p = yes; then
+>   AC_DEFINE([HAVE_BUILTIN_MUL_OVERFLOW_P], [1], [Define if your compiler supports __builtin_mul_overflow_p])
+> fi
+> 
+diff -Nair diffutils-3.6/gnulib-tests/macros.h diffutils-3.6.tpg/gnulib-tests/macros.h
+25c25
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/fnmatch.c diffutils-3.6.tpg/lib/fnmatch.c
+69c69
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/freopen-safer.c diffutils-3.6.tpg/lib/freopen-safer.c
+30c30
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/intprops.h diffutils-3.6.tpg/lib/intprops.h
+224,226d223
+< /* True if __builtin_add_overflow_p (A, B, C) works.  */
+< #define _GL_HAS_BUILTIN_OVERFLOW_P (7 <= __GNUC__)
+< 
+231c228
+< #if _GL_HAS_BUILTIN_OVERFLOW_P
+---
+> #ifdef HAVE_BUILTIN_MUL_OVERFLOW_P
+diff -Nair diffutils-3.6/lib/mbrtowc.c diffutils-3.6.tpg/lib/mbrtowc.c
+39c39
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/quotearg.c diffutils-3.6.tpg/lib/quotearg.c
+58c58
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/strftime.c diffutils-3.6.tpg/lib/strftime.c
+72c72
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/unistr/u8-uctomb-aux.c diffutils-3.6.tpg/lib/unistr/u8-uctomb-aux.c
+24c24
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/vasnprintf.c diffutils-3.6.tpg/lib/vasnprintf.c
+122c122
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+diff -Nair diffutils-3.6/lib/xalloc-oversized.h diffutils-3.6.tpg/lib/xalloc-oversized.h
+44c44
+< #if 7 <= __GNUC__
+---
+> #ifdef HAVE_BUILTIN_MUL_OVERFLOW_P
+diff -Nair diffutils-3.6/src/system.h diffutils-3.6.tpg/src/system.h
+235c235
+< # if __GNUC__ < 7
+---
+> # if __GNUC__ < 7 || !__has_attribute(__fallthrough__)

@@ -1,17 +1,20 @@
+# (tpg) optimize it a bit
+%global optflags %{optflags} -O3
+
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.6
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
 Source2:	diffutils-help2man
+Patch0:		diffutils-3.6-check-for-__builtin_mul_overflow_p.patch
 Patch1:		diffutils-cmp-s-empty.patch
 Patch2:		diffutils-mkdir_p.patch
 Patch4:		diffutils-i18n.patch
 Patch6:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
-
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
 BuildRequires:	libsigsegv-devel
@@ -43,9 +46,9 @@ autoreconf -ivf
 # for finding help2man
 export PATH=$PATH:`pwd`
 %configure \
-	--without-included-regex \
-	--with-packager="%{distribution}" \
-	--with-packager-bug-reports="%{bugurl}"
+    --without-included-regex \
+    --with-packager="%{distribution}" \
+    --with-packager-bug-reports="%{bugurl}"
 
 %make
 
