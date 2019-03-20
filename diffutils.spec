@@ -1,5 +1,7 @@
 # (tpg) optimize it a bit
+%ifnarch riscv64
 %global optflags %{optflags} -O3 --rtlib=compiler-rt
+%endif
 
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
