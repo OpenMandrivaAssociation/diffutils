@@ -38,7 +38,7 @@ Install diffutils if you need to compare text files.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 install -m755 %{SOURCE2} help2man
 
