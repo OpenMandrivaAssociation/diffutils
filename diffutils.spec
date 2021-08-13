@@ -5,18 +5,18 @@
 
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.7
+Version:	3.8
 Release:	1
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
 Source2:	diffutils-help2man
-Patch0:		diffutils-3.6-check-for-__builtin_mul_overflow_p.patch
-Patch1:		diffutils-cmp-s-empty.patch
-Patch2:		diffutils-mkdir_p.patch
-Patch4:		diffutils-i18n.patch
-Patch6:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
+Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
+Patch1:		diffutils-mkdir_p.patch
+Patch2:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-i18n.patch
+Patch3:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
+Patch4:		diffutils-3.8-fix-clang.patch
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
 BuildRequires:	libsigsegv-devel
@@ -37,8 +37,7 @@ Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
 Install diffutils if you need to compare text files.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 install -m755 %{SOURCE2} help2man
 
@@ -46,21 +45,21 @@ autoreconf -ivf
 
 %build
 # for finding help2man
-export PATH=$PATH:`pwd`
+export PATH=$PATH:$(pwd)
 %configure \
     --without-included-regex \
     --with-packager="%{distribution}" \
     --with-packager-bug-reports="%{bugurl}"
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
 %files -f %{name}.lang
 %doc NEWS README
 %{_bindir}/*
-%{_mandir}/man*/*
-%{_infodir}/%{name}.info*
+%doc %{_mandir}/man*/*
+%doc %{_infodir}/%{name}.info*

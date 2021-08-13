@@ -1,7 +1,7 @@
-diff -up diffutils-3.6/src/diff.c.i18n diffutils-3.6/src/diff.c
---- diffutils-3.6/src/diff.c.i18n	2017-05-06 20:02:54.000000000 +0100
-+++ diffutils-3.6/src/diff.c	2017-05-22 10:52:21.989254674 +0100
-@@ -76,6 +76,8 @@ static void try_help (char const *, char
+diff -up diffutils-3.8/src/diff.c.i18n diffutils-3.8/src/diff.c
+--- diffutils-3.8/src/diff.c.i18n	2021-06-12 06:50:55.000000000 +0100
++++ diffutils-3.8/src/diff.c	2021-08-02 09:55:20.671517943 +0100
+@@ -77,6 +77,8 @@ static void try_help (char const *, char
  static void check_stdout (void);
  static void usage (void);
  
@@ -10,9 +10,9 @@ diff -up diffutils-3.6/src/diff.c.i18n diffutils-3.6/src/diff.c
  /* If comparing directories, compare their common subdirectories
     recursively.  */
  static bool recursive;
-@@ -298,6 +300,13 @@ main (int argc, char **argv)
-   excluded = new_exclude ();
+@@ -300,6 +302,13 @@ main (int argc, char **argv)
    presume_output_tty = false;
+   xstdopen ();
  
 +#ifdef HANDLE_MULTIBYTE
 +  if (MB_CUR_MAX > 1)
@@ -24,9 +24,9 @@ diff -up diffutils-3.6/src/diff.c.i18n diffutils-3.6/src/diff.c
    /* Decode the options.  */
  
    while ((c = getopt_long (argc, argv, shortopts, longopts, NULL)) != -1)
-diff -up diffutils-3.6/src/diff.h.i18n diffutils-3.6/src/diff.h
---- diffutils-3.6/src/diff.h.i18n	2017-01-01 11:22:36.000000000 +0000
-+++ diffutils-3.6/src/diff.h	2017-05-22 10:51:09.050371844 +0100
+diff -up diffutils-3.8/src/diff.h.i18n diffutils-3.8/src/diff.h
+--- diffutils-3.8/src/diff.h.i18n	2021-01-02 01:37:49.000000000 +0000
++++ diffutils-3.8/src/diff.h	2021-08-02 09:54:36.922101185 +0100
 @@ -23,6 +23,17 @@
  #include <stdio.h>
  #include <unlocked-io.h>
@@ -58,9 +58,9 @@ diff -up diffutils-3.6/src/diff.h.i18n diffutils-3.6/src/diff.h
  extern lin translate_line_number (struct file_data const *, lin);
  extern struct change *find_change (struct change *);
  extern struct change *find_reverse_change (struct change *);
-diff -up diffutils-3.6/src/io.c.i18n diffutils-3.6/src/io.c
---- diffutils-3.6/src/io.c.i18n	2017-01-01 11:22:36.000000000 +0000
-+++ diffutils-3.6/src/io.c	2017-05-22 10:51:09.050371844 +0100
+diff -up diffutils-3.8/src/io.c.i18n diffutils-3.8/src/io.c
+--- diffutils-3.8/src/io.c.i18n	2021-01-02 01:37:49.000000000 +0000
++++ diffutils-3.8/src/io.c	2021-08-02 09:58:03.672211301 +0100
 @@ -23,6 +23,7 @@
  #include <cmpbuf.h>
  #include <file-type.h>
@@ -398,19 +398,19 @@ diff -up diffutils-3.6/src/io.c.i18n diffutils-3.6/src/io.c
 +
        /* Hash this line until we find a newline.  */
        switch (ig_white_space)
- 	{
+         {
 @@ -397,7 +708,7 @@ find_and_hash_each_line (struct file_dat
- 	    else if (!diff_length_compare_anyway)
- 	      continue;
+             else if (!diff_length_compare_anyway)
+               continue;
  
--	    if (! lines_differ (eqline, ip))
-+	    if (! lines_differ (eqline, eqs[i].length + 1, ip, length + 1))
- 	      break;
- 	  }
+-            if (! lines_differ (eqline, ip))
++            if (! lines_differ (eqline, eqs[i].length + 1, ip, length + 1))
+               break;
+           }
  
-diff -up diffutils-3.6/src/util.c.i18n diffutils-3.6/src/util.c
---- diffutils-3.6/src/util.c.i18n	2017-05-18 18:39:59.000000000 +0100
-+++ diffutils-3.6/src/util.c	2017-05-22 10:51:09.050371844 +0100
+diff -up diffutils-3.8/src/util.c.i18n diffutils-3.8/src/util.c
+--- diffutils-3.8/src/util.c.i18n	2021-01-02 01:37:49.000000000 +0000
++++ diffutils-3.8/src/util.c	2021-08-02 09:54:36.922101185 +0100
 @@ -985,7 +985,8 @@ finish_output (void)
     Return nonzero if the lines differ.  */
  
