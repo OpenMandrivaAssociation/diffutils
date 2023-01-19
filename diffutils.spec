@@ -1,16 +1,16 @@
 # (tpg) optimize it a bit
 %ifnarch riscv64
-%global optflags %{optflags} -O3 --rtlib=compiler-rt
+%global optflags %{optflags} -Oz --rtlib=compiler-rt
 %endif
 
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.8
+Version:	3.9
 Release:	1
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
-Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz	
+Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source2:	diffutils-help2man
 Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
 Patch1:		diffutils-mkdir_p.patch

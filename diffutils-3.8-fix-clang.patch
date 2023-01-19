@@ -1,22 +1,22 @@
-diff -Naur diffutils-3.8/lib/config.hin diffutils-3.8.tpg/lib/config.hin
---- diffutils-3.8/lib/config.hin	2021-08-02 01:20:11.000000000 +0000
-+++ diffutils-3.8.tpg/lib/config.hin	2021-09-22 19:54:20.623106649 +0000
-@@ -1947,7 +1947,7 @@
-    function F.  _GL_ATTRIBUTE_DEALLOC_FREE is for functions that
-    return pointers that can be freed via 'free'; it can be used
-    only after including stdlib.h.  */
+diff -Naur diffutils-3.9/lib/config.hin diffutils-3.9.tpg/lib/config.hin
+--- diffutils-3.9/lib/config.hin	2023-01-15 21:23:14.000000000 +0000
++++ diffutils-3.9.tpg/lib/config.hin	2023-01-27 10:36:35.327630020 +0000
+@@ -2132,7 +2132,7 @@
+    _GL_ATTRIBUTE_DEALLOC_FREE declares that the function returns pointers that
+    can be freed via 'free'; it can be used only after declaring 'free'.  */
+ /* Applies to: functions.  Cannot be used on inline functions.  */
 -#if _GL_GNUC_PREREQ (11, 0)
 +#if _GL_GNUC_PREREQ (11, 0) && !defined(__clang__)
  # define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
  #else
  # define _GL_ATTRIBUTE_DEALLOC(f, i)
-diff -Naur diffutils-3.8/m4/gnulib-common.m4 diffutils-3.8.tpg/m4/gnulib-common.m4
---- diffutils-3.8/m4/gnulib-common.m4	2021-08-01 04:38:23.000000000 +0000
-+++ diffutils-3.8.tpg/m4/gnulib-common.m4	2021-09-22 19:55:08.692869220 +0000
-@@ -153,7 +153,7 @@
-    function F.  _GL_ATTRIBUTE_DEALLOC_FREE is for functions that
-    return pointers that can be freed via 'free'; it can be used
-    only after including stdlib.h.  */
+diff -Naur diffutils-3.9/m4/gnulib-common.m4 diffutils-3.9.tpg/m4/gnulib-common.m4
+--- diffutils-3.9/m4/gnulib-common.m4	2023-01-15 21:09:38.000000000 +0000
++++ diffutils-3.9.tpg/m4/gnulib-common.m4	2023-01-27 10:37:09.047478971 +0000
+@@ -178,7 +178,7 @@
+    _GL_ATTRIBUTE_DEALLOC_FREE declares that the function returns pointers that
+    can be freed via 'free'; it can be used only after declaring 'free'.  */
+ /* Applies to: functions.  Cannot be used on inline functions.  */
 -#if _GL_GNUC_PREREQ (11, 0)
 +#if _GL_GNUC_PREREQ (11, 0) && !defined(__clang__)
  # define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
