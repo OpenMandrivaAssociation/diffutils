@@ -5,21 +5,20 @@
 
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.9
-Release:	2
+Version:	3.10
+Release:	1
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source2:	diffutils-help2man
-Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
+#Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
 Patch1:		diffutils-mkdir_p.patch
-Patch2:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-i18n.patch
+#Patch2:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-i18n.patch
 Patch3:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
 Patch4:		diffutils-3.8-fix-clang.patch
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
-BuildRequires:	libsigsegv-devel
 
 %description
 Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
@@ -44,6 +43,8 @@ install -m755 %{SOURCE2} help2man
 autoreconf -ivf
 
 %build
+export ac_cv_libsigsegv=no
+
 # for finding help2man
 export PATH=$PATH:$(pwd)
 %configure \
