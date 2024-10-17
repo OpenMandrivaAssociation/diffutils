@@ -9,7 +9,7 @@ Version:	3.10
 Release:	1
 License:	GPLv2+
 Group:		Development/Other
-Url:		http://www.gnu.org/software/diffutils/
+Url:		https://www.gnu.org/software/diffutils/
 Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
 Source2:	diffutils-help2man
 #Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
