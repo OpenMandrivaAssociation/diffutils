@@ -1,9 +1,9 @@
-diff -Naur diffutils-3.8/configure.ac diffutils-3.8.tpg/configure.ac
---- diffutils-3.8/configure.ac	2021-04-02 23:04:18.000000000 +0000
-+++ diffutils-3.8.tpg/configure.ac	2021-09-16 17:36:58.679175288 +0000
-@@ -106,7 +106,7 @@
- 
- AC_C_INLINE
+diff -up diffutils-3.12/configure.ac.2~ diffutils-3.12/configure.ac
+--- diffutils-3.12/configure.ac.2~	2025-02-02 20:17:30.000000000 +0100
++++ diffutils-3.12/configure.ac	2025-04-09 15:10:27.249716764 +0200
+@@ -176,7 +176,7 @@ if test $gl_gcc_warnings != no; then
+   AC_DEFINE([GNULIB_PORTCHECK], [1], [enable some gnulib portability checks])
+ fi
  
 -AC_DEFINE([DEFAULT_EDITOR_PROGRAM], ["ed"],
 +AC_DEFINE([DEFAULT_EDITOR_PROGRAM], ["vi"],

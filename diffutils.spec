@@ -5,7 +5,7 @@
 
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
-Version:	3.10
+Version:	3.12
 Release:	1
 License:	GPLv2+
 Group:		Development/Other
@@ -19,6 +19,7 @@ Patch3:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
 Patch4:		diffutils-3.8-fix-clang.patch
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
+BuildRequires:	slibtool
 
 %description
 Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
@@ -40,7 +41,10 @@ Install diffutils if you need to compare text files.
 
 install -m755 %{SOURCE2} help2man
 
-autoreconf -ivf
+slibtoolize --force
+aclocal -I m4
+automake -a
+autoconf
 
 %build
 export ac_cv_libsigsegv=no
