@@ -17,6 +17,10 @@ Patch1:		diffutils-mkdir_p.patch
 #Patch2:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-i18n.patch
 Patch3:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
 Patch4:		diffutils-3.8-fix-clang.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	make
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
 BuildRequires:	slibtool
