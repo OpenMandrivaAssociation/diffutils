@@ -10,7 +10,7 @@ Release:	1
 License:	GPLv2+
 Group:		Development/Other
 Url:		https://www.gnu.org/software/diffutils/
-Source0:	ftp://ftp.gnu.org/pub/gnu/diffutils/%{name}-%{version}.tar.xz
+Source0:	https://ftp.gnu.org/gnu/diffutils/%{name}-%{version}.tar.xz
 Source2:	diffutils-help2man
 #Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
 Patch1:		diffutils-mkdir_p.patch
@@ -52,6 +52,9 @@ autoconf
 
 %build
 export ac_cv_libsigsegv=no
+%if %{cross_compiling}
+export gl_cv_func_strcasecmp_works=yes
+%endif
 
 # for finding help2man
 export PATH=$PATH:$(pwd)
