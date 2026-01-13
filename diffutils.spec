@@ -1,8 +1,3 @@
-# (tpg) optimize it a bit
-%ifnarch riscv64
-%global optflags %{optflags} -Oz --rtlib=compiler-rt
-%endif
-
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.12
@@ -11,19 +6,18 @@ License:	GPLv2+
 Group:		Development/Other
 Url:		https://www.gnu.org/software/diffutils/
 Source0:	https://ftp.gnu.org/gnu/diffutils/%{name}-%{version}.tar.xz
-Source2:	diffutils-help2man
 #Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
 Patch1:		diffutils-mkdir_p.patch
 #Patch2:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-i18n.patch
 Patch3:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
 Patch4:		diffutils-3.8-fix-clang.patch
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool-base
-BuildRequires:	make
+BuildSystem:	autotools
+BuildOption:	--without-included-regex
+BuildOption:	--with-packager="%{distribution}"
+BuildOption:	--with-packager-bug-reports="%{bugurl}"
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
-BuildRequires:	slibtool
+BuildRequires:	help2man
 
 %description
 Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
@@ -40,34 +34,19 @@ Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
 
 Install diffutils if you need to compare text files.
 
-%prep
-%autosetup -p1
-
-install -m755 %{SOURCE2} help2man
-
-slibtoolize --force
-aclocal -I m4
-automake -a
-autoconf
-
-%build
+%conf -p
 export ac_cv_libsigsegv=no
 %if %{cross_compiling}
 export gl_cv_func_strcasecmp_works=yes
 %endif
 
-# for finding help2man
-export PATH=$PATH:$(pwd)
-%configure \
-    --without-included-regex \
-    --with-packager="%{distribution}" \
-    --with-packager-bug-reports="%{bugurl}"
+%build -p
+export ac_cv_libsigsegv=no
+%if %{cross_compiling}
+export gl_cv_func_strcasecmp_works=yes
+%endif
 
-%make_build
-
-%install
-%make_install
-
+%install -a
 %find_lang %{name}
 
 %files -f %{name}.lang
