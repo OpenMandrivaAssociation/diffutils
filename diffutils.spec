@@ -1,16 +1,11 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.12
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Development/Other
 Url:		https://www.gnu.org/software/diffutils/
 Source0:	https://ftp.gnu.org/gnu/diffutils/%{name}-%{version}.tar.xz
-#Patch0:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-cmp-s-empty.patch
-Patch1:		diffutils-mkdir_p.patch
-#Patch2:		https://src.fedoraproject.org/rpms/diffutils/raw/rawhide/f/diffutils-i18n.patch
-Patch3:		diffutils-3.3-change-default-editor-from-ed-to-vi.patch
-Patch4:		diffutils-3.8-fix-clang.patch
 BuildSystem:	autotools
 BuildOption:	--without-included-regex
 BuildOption:	--with-packager="%{distribution}"
@@ -18,6 +13,15 @@ BuildOption:	--with-packager-bug-reports="%{bugurl}"
 BuildRequires:	gettext-devel
 BuildRequires:	texinfo
 BuildRequires:	help2man
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	pkgconfig(zlib-ng)
+
+%patchlist
+diffutils-mkdir_p.patch
+diffutils-3.3-change-default-editor-from-ed-to-vi.patch
+diffutils-3.8-fix-clang.patch
+diffutils-binary-diffs.patch
 
 %description
 Diffutils includes four utilities:  diff, cmp, diff3 and sdiff.
