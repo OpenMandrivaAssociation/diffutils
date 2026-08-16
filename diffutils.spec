@@ -1,7 +1,7 @@
 Summary:	A GNU collection of diff utilities
 Name:		diffutils
 Version:	3.12
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Development/Other
 Url:		https://www.gnu.org/software/diffutils/
@@ -48,6 +48,8 @@ export gl_cv_func_strcasecmp_works=yes
 export ac_cv_libsigsegv=no
 %if %{cross_compiling}
 export gl_cv_func_strcasecmp_works=yes
+# help2man cannot execute the just-built target binaries
+touch man/*.1
 %endif
 
 %install -a
